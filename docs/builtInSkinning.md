@@ -1,6 +1,7 @@
 [Built-In](builtIn.md)
 
-**Skinning**
+<h1 style="font-size:10vw">Skinning</h1>
+
 <table>
   <tr>
     <th>Item</th>
