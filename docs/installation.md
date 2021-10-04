@@ -3,7 +3,7 @@
 3.	Inside Maya, open Script Editor (Windows > General Editors > Script Editor).
 4.	Open a new tab in the editor for Python.
 5.	Paste the code below in the editor:<br/>
-		from URT_atulshakya import MainDialog<br/>
+		from URT_atulshakya import MainDialog
 		MainDialog.showDialog()
 
 6.	Press the ‘Enter’ key on your Numpad to run the script. 
