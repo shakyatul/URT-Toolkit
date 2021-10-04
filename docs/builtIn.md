@@ -1,3 +1,9 @@
+[Description] <br/>
+
+[How-To Use Video] <br/>
+<br/>
+![Built-In](./images/UI/builtIn.png)
+<br/>
 
 * [Built-In](builtIn.md)
   * [General](searchAndReplace.md)
