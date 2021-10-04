@@ -1,7 +1,7 @@
 
 [Tools](toolsOption.md)
 
-<h1 style="font-size:10vw">Helper Scripts</h1>
+<h1 style="font-size:3em">Helper Scripts</h1>
 
 * [Search and Replace Names](searchAndReplace.md)
 * [Create Controllers](createController.md)
