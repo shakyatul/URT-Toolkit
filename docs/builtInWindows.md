@@ -1,6 +1,6 @@
 [Built-In](builtIn.md)
 
-<h1 style="font-size:10vw">Windows</h1>
+<h1 style="font-size:3em">Windows</h1>
 
 <table>
   <tr>
