@@ -7,9 +7,9 @@
 ![Built-In](./images/UI/builtIn.png)
 <br/>
 
-* [General](searchAndReplace.md)
-* [Joint](searchAndReplace.md)
-* [Skinning](searchAndReplace.md)
-* [Deform](searchAndReplace.md)
-* [Constraint](searchAndReplace.md)
-* [Windows](searchAndReplace.md)
+* [General](builtInGeneral.md)
+* [Joint](builtInJoints.md)
+* [Skinning](builtInSkinning.md)
+* [Deform](builtInDeform.md)
+* [Constraint](builtInConstraints.md)
+* [Windows](builtInWindows.md)
