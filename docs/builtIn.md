@@ -1,3 +1,5 @@
+* [Built-In](builtIn.md)
+
 [Description] <br/>
 
 [How-To Use Video] <br/>
@@ -5,10 +7,9 @@
 ![Built-In](./images/UI/builtIn.png)
 <br/>
 
-* [Built-In](builtIn.md)
-  * [General](searchAndReplace.md)
-  * [Joint](searchAndReplace.md)
-  * [Skinning](searchAndReplace.md)
-  * [Deform](searchAndReplace.md)
-  * [Constraint](searchAndReplace.md)
-  * [Windows](searchAndReplace.md)
+* [General](searchAndReplace.md)
+* [Joint](searchAndReplace.md)
+* [Skinning](searchAndReplace.md)
+* [Deform](searchAndReplace.md)
+* [Constraint](searchAndReplace.md)
+* [Windows](searchAndReplace.md)
