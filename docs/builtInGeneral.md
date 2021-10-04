@@ -1,6 +1,7 @@
 [Built-In](builtIn.md)
 
-**General**
+<h1 style="font-size:10vw">General</h1>
+
 <table>
   <tr>
     <th>Item</th>
