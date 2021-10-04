@@ -13,10 +13,10 @@
     <td>List of shapes to select from</td>
   </tr>
   <tr>
-    <td>**Force Label:**</td>
+    <td><b>Force Label:<b></td>
     <td>When creating a controller by selecting an object in the scene:<br/>
-        **Check:** To name the controller using the ‘Label’ above<br/>
-        **Uncheck:** To use the name of the selected item<br/></td>
+        Check: To name the controller using the ‘Label’ above<br/>
+        Uncheck: To use the name of the selected item<br/></td>
   </tr>
 </table>
 
