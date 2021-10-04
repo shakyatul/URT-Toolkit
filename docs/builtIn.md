@@ -1,4 +1,4 @@
-* [Built-In](builtIn.md)
+[Built-In](builtIn.md)
 
 [Description] <br/>
 
