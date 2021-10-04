@@ -1,6 +1,6 @@
 [Built-In](builtIn.md)
 
-<h1 style="font-size:10vw">Joints</h1>
+<h1 style="font-size:3em">Joints</h1>
 
 <table>
   <tr>
