@@ -1,6 +1,6 @@
 <!-- docs/_sidebar.md -->
 
-* [Introduction](./)
+* [Introduction](README.md)
 * [Installation](installation.md)
 * [Software Specification](softwareSpec.md)
 * [Tools](toolsOption.md)
