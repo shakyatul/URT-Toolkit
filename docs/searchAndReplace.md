@@ -1,5 +1,8 @@
 [Description] <br/>
 [How-To Use Video] <br/>
+<br/>
+!(./docs/images/Windows/1)
+<br/>
 
 <b>Hierarchy:</b>	Renames the entire hierarchy of the selected object/s <br/>
 <b>Selected:</b>	Renames only the selected object/s <br/>
