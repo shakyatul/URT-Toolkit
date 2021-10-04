@@ -5,7 +5,7 @@
 ![Built-In](./images/UI/builtIn.png)
 <br/>
 
-#General
+**General**
 <table>
   <tr>
     <th>Item</th>
