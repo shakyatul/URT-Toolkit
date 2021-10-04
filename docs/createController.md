@@ -3,6 +3,24 @@
 <br/>
 ![Create Controller](./images/UI/control.png)
 <br/>
+<table>
+  <tr>
+    <th> </th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>**Text Box with Shape Names:**</td>
+    <td>List of shapes to select from</td>
+  </tr>
+  <tr>
+    <td>**Force Label:**</td>
+    <td>When creating a controller by selecting an object in the scene:<br/>
+        **Check:** To name the controller using the ‘Label’ above<br/>
+        **Uncheck:** To use the name of the selected item<br/></td>
+  </tr>
+</table>
+
+
 **Text Box with Shape Names:**	List of shapes to select from<br/>
 **Force Label:**	When creating a controller by selecting an object in the scene:<br/>
 **Check:** To name the controller using the ‘Label’ above<br/>
