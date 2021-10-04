@@ -1,4 +1,4 @@
-<h1 style="font-size:10vw">Installation</h1>
+<h1 style="font-size:3em">Installation</h1>
 
 1.	Copy the ‘URT_atulshakya.py’ script into your Maya script folder, usually located at C:\Users\<UserName>\Documents\maya\2020\scripts.
 2.	Open a fresh version of Maya, i.e. restart Maya if you already have it open.
