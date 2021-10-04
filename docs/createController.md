@@ -1,6 +1,6 @@
 [Helper Scripts](helperScripts.md)
 
-<h1 style="font-size:10vw">Create Controller</h1>
+<h1 style="font-size:3em">Create Controller</h1>
 
 [Description]<br/>
 
