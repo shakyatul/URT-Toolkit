@@ -6,7 +6,7 @@
 
 [How-To Use Video] <br/>
 <br/>
-![Export to FBX](./images/UI/ExportTool.png)
+![Export to FBX](./images/UI/Export Tool.png)
 <br/>
 
 <table>
