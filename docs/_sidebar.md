@@ -5,19 +5,19 @@
 * [Introduction](introduction.md)
 * [Installation](installation.md)
 * [Software Specification](softwareSpec.md)
-* [Tools]
-  * [Helper Scripts]
-    * [Search and Replace Names]
-    * [Create Controllers]
-    * [Create Controllers from Text]
-    * [Export To FBX]
-    * [Range of Motion (ROM)]
-    * [Miscellaneous]
-  * [Built-In]
-    * [General]
-    * [Joint]
-    * [Skinning]
-    * [Deform]
-    * [Constraint]
-    * [Windows]
-  * [Control Rig]
+* [Tools](searchAndReplace.md)
+  * [Helper Scripts](searchAndReplace.md)
+    * [Search and Replace Names](searchAndReplace.md)
+    * [Create Controllers](searchAndReplace.md)
+    * [Create Controllers from Text](searchAndReplace.md)
+    * [Export To FBX](searchAndReplace.md)
+    * [Range of Motion (ROM)](searchAndReplace.md)
+    * [Miscellaneous](searchAndReplace.md)
+  * [Built-In](searchAndReplace.md)
+    * [General](searchAndReplace.md)
+    * [Joint](searchAndReplace.md)
+    * [Skinning](searchAndReplace.md)
+    * [Deform](searchAndReplace.md)
+    * [Constraint](searchAndReplace.md)
+    * [Windows](searchAndReplace.md)
+  * [Control Rig](searchAndReplace.md)
