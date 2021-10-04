@@ -1,7 +1,5 @@
 <!-- docs/_sidebar.md -->
 
-* [Home Page](./)
-
 * [Introduction](introduction.md)
 * [Installation](installation.md)
 * [Software Specification](softwareSpec.md)
