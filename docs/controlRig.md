@@ -1,3 +1,7 @@
+[Tools](toolsOption.md)
+
+<h1 style="font-size:10vw">Control Rig</h1>
+
 [Description] <br/>
 
 [How-To Use Video] <br/>
