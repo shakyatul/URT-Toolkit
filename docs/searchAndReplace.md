@@ -1,4 +1,4 @@
-* [Helper Scripts](helperScripts.md)
+[Helper Scripts](helperScripts.md)
 
 [Description] <br/>
 
