@@ -1,6 +1,7 @@
 [Built-In](builtIn.md)
 
-**Joints**
+<h1 style="font-size:10vw">Joints</h1>
+
 <table>
   <tr>
     <th>Item</th>
