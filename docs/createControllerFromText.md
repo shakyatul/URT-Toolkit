@@ -1,6 +1,6 @@
 [Helper Scripts](helperScripts.md)
 
-<h1 style="font-size:10vw">Create Controller from Text</h1>
+<h1 style="font-size:3em">Create Controller from Text</h1>
 
 [Description]<br/>
 
