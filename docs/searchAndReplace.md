@@ -1,7 +1,7 @@
 [Description] <br/>
 [How-To Use Video] <br/>
 
-Hierarchy:	Renames the entire hierarchy of the selected object/s <br/>
+<b>Hierarchy:</b>	Renames the entire hierarchy of the selected object/s <br/>
 Selected:	Renames only the selected object/s <br/>
 All:	Renames all the DAG objects in the scene <br/>
 Search:	Input the string that is to be replaced <br/>
