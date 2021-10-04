@@ -1,5 +1,5 @@
+<h1 style="font-size:10vw">Tools</h1>
 
-* [Tools](toolsOption.md)
-  * [Helper Scripts](helperScripts.md)
-  * [Built-In](builtIn.md)
-  * [Control Rig](controlRig.md)
+* [Helper Scripts](helperScripts.md)
+* [Built-In](builtIn.md)
+* [Control Rig](controlRig.md)
