@@ -1,5 +1,7 @@
 [Helper Scripts](helperScripts.md)
 
+##Search and Replace Names
+
 [Description] <br/>
 
 [How-To Use Video] <br/>
