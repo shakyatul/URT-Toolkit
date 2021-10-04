@@ -1,6 +1,6 @@
 [Built-In](builtIn.md)
 
-<h1 style="font-size:10vw">Constraints</h1>
+<h1 style="font-size:3em">Constraints</h1>
 
 <table>
   <tr>
