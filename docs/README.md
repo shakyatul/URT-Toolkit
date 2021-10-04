@@ -1,3 +1,3 @@
-## URT Toolkit
+<h1 style="font-size:3em">Introduction</h1>
 
-> RIGGING TOOLKIT FOR MAYA
+Welcome to the URT Toolkit Documentation.
