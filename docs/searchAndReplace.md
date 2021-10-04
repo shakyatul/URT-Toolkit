@@ -1,6 +1,6 @@
 [Helper Scripts](helperScripts.md)
 
-<big>Search and Replace Names</big>
+<h1 style="font-size:10vw">Search and Replace Names</h1>
 
 [Description] <br/>
 
