@@ -1,6 +1,6 @@
 [Helper Scripts](helperScripts.md)
 
-<h1 style="font-size:10vw">Export to FBX</h1>
+<h1 style="font-size:3em">Export to FBX</h1>
 
 [Description] <br/>
 
