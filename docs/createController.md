@@ -5,11 +5,11 @@
 <br/>
 <table>
   <tr>
-    <th> </th>
+    <th>Item</th>
     <th>Description</th>
   </tr>
   <tr>
-    <td>**Text Box with Shape Names:**</td>
+    <td><b>Text Box with Shape Names:</b></td>
     <td>List of shapes to select from</td>
   </tr>
   <tr>
