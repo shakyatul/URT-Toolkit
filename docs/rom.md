@@ -2,7 +2,7 @@
 
 [How-To Use Video] <br/>
 <br/>
-![Range of Motion (ROM)](./images/UI/rom.png)
+![Range of Motion](./images/UI/rom.PNG)
 <br/>
 
 <table>
