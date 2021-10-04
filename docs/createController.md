@@ -1,7 +1,7 @@
 [Description]<br/>
 [How-To Use Video]<br/>
 <br/>
-![Create Controller](./images/UI/controlRig.png)
+![Create Controller](./images/UI/control.png)
 <br/>
 **Text Box with Shape Names:**	List of shapes to select from<br/>
 **Force Label:**	When creating a controller by selecting an object in the scene:<br/>
