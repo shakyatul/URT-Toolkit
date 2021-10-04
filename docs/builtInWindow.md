@@ -12,7 +12,7 @@
     <th>Description</th>
   </tr>
   <tr>
-    <td><img src = "loc.png"></img></td>
+    <td><img src = "./images/General/loc.png"></img></td>
     <td>Create a Locator</td>
   </tr>
 </table>
