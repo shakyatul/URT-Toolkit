@@ -1,3 +1,5 @@
+* [Helper Scripts](helperScripts.md)
+
 [Description] <br/>
 
 [How-To Use Video] <br/>
