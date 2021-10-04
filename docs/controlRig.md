@@ -1,6 +1,6 @@
 [Tools](toolsOption.md)
 
-<h1 style="font-size:10vw">Control Rig</h1>
+<h1 style="font-size:3em">Control Rig</h1>
 
 [Description] <br/>
 
