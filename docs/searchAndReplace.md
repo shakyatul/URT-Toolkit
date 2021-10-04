@@ -1,6 +1,6 @@
 [Helper Scripts](helperScripts.md)
 
-##Search and Replace Names
+<big>Search and Replace Names</big>
 
 [Description] <br/>
 
