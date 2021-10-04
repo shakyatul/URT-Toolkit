@@ -1,7 +1,7 @@
 [Description] <br/>
 [How-To Use Video] <br/>
 <br/>
-!(./images/UI/searchReplace.png)
+![Search and Replace Names](./images/UI/searchReplace.png)
 <br/>
 
 <b>Hierarchy:</b>	Renames the entire hierarchy of the selected object/s <br/>
