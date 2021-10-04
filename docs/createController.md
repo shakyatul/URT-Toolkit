@@ -18,22 +18,46 @@
         Check: To name the controller using the ‘Label’ above<br/>
         Uncheck: To use the name of the selected item<br/></td>
   </tr>
+  <tr>
+    <td><b>Snap to Selected:<b></td>
+    <td>When creating a controller by selecting an object in the scene:<br/>
+        Check: To snap the controller to the selected object (with transform)<br/>
+        Uncheck: To create the controller in the origin<br/></td>
+  </tr>
+  <tr>
+    <td><b>Label:<b></td>
+    <td>Input the name of the controller</td>
+  </tr>
+  <tr>
+    <td><b>Suffix:<b></td>
+    <td>Input the string to include at the end of the controller’s name</td>
+  </tr>
+  <tr>
+    <td><b>Size:<b></td>
+    <td>Input the size of the controller</td>
+  </tr>
+  <tr>
+    <td><b>Color:<b></td>
+    <td>Determines the color of the controller being created</td>
+  </tr>
+  <tr>
+    <td><b>Groups:<b></td>
+    <td>Input the number of groups to go over the controller</td>
+  </tr>
+  <tr>
+    <td><b>Suffix 1:<b></td>
+    <td>Input the string to include at the end of the first group’s name</td>
+  </tr>
+  <tr>
+    <td><b>Suffix 2:<b></td>
+    <td>Input the string to include at the end of the second group’s name</td>
+  </tr>
+  <tr>
+    <td><b>Suffix 3:<b></td>
+    <td>Input the string to include at the end of the third group’s name</td>
+  </tr>
+  <tr>
+    <td><b>Suffix 4:<b></td>
+    <td>Input the string to include at the end of the fourth group’s name</td>
+  </tr>
 </table>
-
-
-**Text Box with Shape Names:**	List of shapes to select from<br/>
-**Force Label:**	When creating a controller by selecting an object in the scene:<br/>
-**Check:** To name the controller using the ‘Label’ above<br/>
-**Uncheck:** To use the name of the selected item<br/>
-**Snap to Selected:**	When creating a controller by selecting an object in the scene:<br/>
-**Check:** To snap the controller to the selected object (with transform)<br/>
-**Uncheck:** To create the controller in the origin<br/>
-**Label:**	Input the name of the controller<br/>
-**Suffix:**	Input the string to include at the end of the controller’s name<br/>
-**Size:**	Input the size of the controller<br/>
-**Color:**	Determines the color of the controller being created<br/>
-**Groups:** Input the number of groups to go over the controller<br/>
-**Suffix 1:**	Input the string to include at the end of the first group’s name<br/>
-**Suffix 2:**	Input the string to include at the end of the second group’s name<br/>
-**Suffix 3:**	Input the string to include at the end of the third group’s name<br/>
-**Suffix 4:**	Input the string to include at the end of the fourth group’s name<br/>
