@@ -4,8 +4,8 @@
 #AUTHOR: ATUL SHAKYA
 #CREATION DATE: MAY 26, 2021
 
-#RUNNING VERSION: v033
-#LAST UPDATED: UPDATED THE WAY THE IK HANDLE IS SETUP (USING VECTOR MATH)
+#RUNNING VERSION: v034
+#LAST UPDATED: FIXED THE CONTROL RIG ISSUES (FK AND IK CONNECTIONS)
 
 #DESCRIPTION: GROUP OF RIGGING TOOLS IN MAYA
 #REQUIREMENT: N/A
@@ -2851,20 +2851,20 @@ def bipedSpineBuild(pelvisJNT, spineBaseJNT, chestJNT, neckJNT, headJNT, control
         cmds.setAttr("{0}.inheritsTransform".format(splineCurve), 0)
 
         #Creating controllers for the spline Ik and pelvis joints
-        splineBaseJNT_ctrl =  cmds.circle (c = (0,0,0), nr = (0,1,0), sw = 360, r = 1, d = 3, ut = 0, tol = 0.01, s = 8, ch = 1, n = "splineBase_CTRL")
-        splineBaseJNT_ctrl = splineBaseJNT_ctrl[0]
+        splineBaseJNT_ctrl =  mel.eval ("curve -d 1 -p -0.5 -0.5 -0.5 -p 0.5 -0.5 -0.5 -p 0.5 0.5 -0.5 -p -0.5 0.5 -0.5 -p -0.5 -0.5 -0.5 -p -0.5 -0.5 0.5 -p 0.5 -0.5 0.5 -p 0.5 -0.5 -0.5 -p 0.5 0.5 -0.5 -p 0.5 0.5 0.5 -p 0.5 -0.5 0.5 -p 0.5 0.5 0.5 -p -0.5 0.5 0.5 -p -0.5 -0.5 0.5 -p -0.5 0.5 0.5 -p -0.5 0.5 -0.5 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 -k 9 -k 10 -k 11 -k 12 -k 13 -k 14 -k 15 ;") 
+        splineBaseJNT_ctrl = cmds.rename (splineBaseJNT_ctrl, "splineBase_CTRL")
         cmds.rotate (0,0,90, splineBaseJNT_ctrl)
-        cmds.scale(controllerScale * 3, controllerScale * 3, controllerScale * 3, r = True)
+        cmds.scale(controllerScale * 5, controllerScale/2, controllerScale * 5, r = True)
         cmds.makeIdentity (apply = True, r = 1, t = 1, s = 1, n = 0)
         cmds.DeleteHistory()
         
         splineBaseJNT_con = cmds.group(n = "splineBase_CTRL_CON")
         splineBaseJNT_offset = cmds.group(n = "splineBase_CTRL_0")
         
-        splineTipJNT_ctrl =  cmds.circle (c = (0,0,0), nr = (0,1,0), sw = 360, r = 1, d = 3, ut = 0, tol = 0.01, s = 8, ch = 1, n = "splineTip_CTRL")
-        splineTipJNT_ctrl = splineTipJNT_ctrl[0]
+        splineTipJNT_ctrl =  mel.eval ("curve -d 1 -p -0.5 -0.5 -0.5 -p 0.5 -0.5 -0.5 -p 0.5 0.5 -0.5 -p -0.5 0.5 -0.5 -p -0.5 -0.5 -0.5 -p -0.5 -0.5 0.5 -p 0.5 -0.5 0.5 -p 0.5 -0.5 -0.5 -p 0.5 0.5 -0.5 -p 0.5 0.5 0.5 -p 0.5 -0.5 0.5 -p 0.5 0.5 0.5 -p -0.5 0.5 0.5 -p -0.5 -0.5 0.5 -p -0.5 0.5 0.5 -p -0.5 0.5 -0.5 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 -k 9 -k 10 -k 11 -k 12 -k 13 -k 14 -k 15 ;") 
+        splineTipJNT_ctrl = cmds.rename (splineTipJNT_ctrl, "splineTip_CTRL")
         cmds.rotate (0,0,90, splineTipJNT_ctrl)
-        cmds.scale(controllerScale * 3, controllerScale * 3, controllerScale * 3, r = True)
+        cmds.scale(controllerScale * 5, controllerScale/2, controllerScale * 5, r = True)
         cmds.makeIdentity (apply = True, r = 1, t = 1, s = 1, n = 0)
         cmds.DeleteHistory()
         
@@ -3088,8 +3088,9 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
         cmds.parentConstraint (clavicleFKJNT, clavicleJNT, weight = 1)
         
         #Creating the clavicle controller
-        clavicleCTRL = cmds.circle (c = (0,0,0), nr = (0,1,0), sw = 360, r = 1, d = 3, ut = 0, tol = 0.01, s = 8, ch = 1 , n = (side + "_clavicle_CTRL"))[0]
-        cmds.scale(controllerScale, controllerScale, controllerScale, r = True)
+        clavicleCTRL = mel.eval ("curve -d 1 -p 0 1 0 -p -0.258819 0.965926 0 -p -0.5 0.866025 0 -p -0.707107 0.707107 0 -p -0.866025 0.5 0 -p -0.965926 0.258819 0 -p -1 0 0 -p -0.965926 -0.258819 0 -p -0.866025 -0.5 0 -p -0.707107 -0.707107 0 -p -0.5 -0.866025 0 -p -0.258819 -0.965926 0 -p 0 -1 0 -p 0.258819 -0.965926 0 -p 0.5 -0.866025 0 -p 0.707107 -0.707107 0 -p 0.866025 -0.5 0 -p 0.965926 -0.258819 0 -p 1 0 0 -p 0.965926 0.258819 0 -p 0.866025 0.5 0 -p 0.707107 0.707107 0 -p 0.5 0.866025 0 -p 0.258819 0.965926 0 -p 0 1 0 -p 0 0.965926 -0.258819 -p 0 0.866025 -0.5 -p 0 0.707107 -0.707107 -p 0 0.5 -0.866025 -p 0 0.258819 -0.965926 -p 0 0 -1 -p 0 -0.258819 -0.965926 -p 0 -0.5 -0.866025 -p 0 -0.707107 -0.707107 -p 0 -0.866025 -0.5 -p 0 -0.965926 -0.258819 -p 0 -1 0 -p 0 -0.965926 0.258819 -p 0 -0.866025 0.5 -p 0 -0.707107 0.707107 -p 0 -0.5 0.866025 -p 0 -0.258819 0.965926 -p 0 0 1 -p 0 0.258819 0.965926 -p 0 0.5 0.866025 -p 0 0.707107 0.707107 -p 0 0.866025 0.5 -p 0 0.965926 0.258819 -p 0 1 0 -p 0.258819 0.965926 0 -p 0.5 0.866025 0 -p 0.707107 0.707107 0 -p 0.866025 0.5 0 -p 0.965926 0.258819 0 -p 1 0 0 -p 0.866025 0 -0.5 -p 0.5 0 -0.866025 -p 0 0 -1 -p -0.5 0 -0.866025 -p -0.866025 0 -0.5 -p -1 0 0 -p -0.866025 0 0.5 -p -0.5 0 0.866025 -p 0 0 1 -p 0.5 0 0.866025 -p 0.866025 0 0.5 -p 1 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 -k 9 -k 10 -k 11 -k 12 -k 13 -k 14 -k 15 -k 16 -k 17 -k 18 -k 19 -k 20 -k 21 -k 22 -k 23 -k 24 -k 25 -k 26 -k 27 -k 28 -k 29 -k 30 -k 31 -k 32 -k 33 -k 34 -k 35 -k 36 -k 37 -k 38 -k 39 -k 40 -k 41 -k 42 -k 43 -k 44 -k 45 -k 46 -k 47 -k 48 -k 49 -k 50 -k 51 -k 52 -k 53 -k 54 -k 55 -k 56 -k 57 -k 58 -k 59 -k 60 -k 61 -k 62 -k 63 -k 64 -k 65 -k 66;")
+        clavicleCTRL = cmds.rename (clavicleCTRL, side + "_clavicle_CTRL")
+        cmds.scale(controllerScale/2, controllerScale/2, controllerScale/2, r = True)
         cmds.makeIdentity (apply = True, r = 1, t = 1, s = 1, n = 0)
         cmds.DeleteHistory()
         clavicleCON = cmds.group(n = side + "_clavicle_CTRL_CON")
@@ -3098,8 +3099,13 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
         #Snapping the clavicle controller to the joint
         cmds.select (clavicleFKJNT, clavicleOFF, r = True)
         cmds.delete (cmds.parentConstraint (weight = 1))
-        cmds.select (clavicleCTRL+".cv[0:7]", r = True)
-        cmds.rotate (0, 0, -90, r = True, os = True, fo = True)
+        
+        #Positioning the clavicle controller
+        cmds.select (clavicleCTRL + '.cv[0:66]', r = True)
+        if (cmds.xform (clavicleJNT, q = True, ws = True, translation = True)[0] > 0):
+            cmds.move (0, 0, (4 * controllerScale), os = True, wd = True, r = True)
+        else:
+            cmds.move (0, 0, (-4 * controllerScale), os = True, wd = True, r = True)   
         
         #Connecting the clavicle controller to the joint
         cmds.parentConstraint (clavicleCTRL, clavicleFKJNT, weight = 1, mo = False)
@@ -3109,7 +3115,34 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
         cmds.parent (clavicleOFF, side + "_clavicle_CTRL_GRP", r = False)
         
         cmds.group (em = True, n = side + "_clavicle_JNT_GRP")
-        cmds.parent (clavicleFKJNT, side + "_clavicle_JNT_GRP", r = False)
+        cmds.parent (clavicleFKJNT, side + "_clavicle_JNT_GRP", r = False)      
+        
+        
+        #Getting the twist bind joints and creating alist
+        #Shoulder
+        shoulderTwistBindJntsTemp = cmds.listRelatives (shoulderJNT, c = True)
+        shoulderTwistBindJnts = []
+        
+        #If there are more than 1 children for the shoulder joint [the one being the elbow jnt]
+        if len(shoulderTwistBindJntsTemp) > 1:
+            for jnt in shoulderTwistBindJntsTemp:
+                if 'twist' in jnt:
+                    shoulderTwistBindJnts.append(jnt)
+                
+            shoulderTwistBindJnts.sort()
+        
+        #Elbow
+        elbowTwistBindJntsTemp = cmds.listRelatives (elbowJNT, c = True)
+        elbowTwistBindJnts = []
+        
+        #If there are more than 1 children for the elbow joint [the one being the wrist jnt]
+        if len(elbowTwistBindJntsTemp) > 1:
+            for jnt in elbowTwistBindJntsTemp:
+                if 'twist' in jnt:
+                    elbowTwistBindJnts.append(jnt)
+                
+            elbowTwistBindJnts.sort()      
+            
         
         shoulderTwistFKJNT = []
         elbowTwistFKJNT = []
@@ -3466,56 +3499,20 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
 
             cmds.select (ikFkControl, r = True)
             cmds.addAttr (ln = "FKIK", at = "float", min = 0, max = 1, dv = 0, k = True)
-            
-            #Getting the twist bind joints and creating alist
-            #Shoulder
-            shoulderTwistBindJntsTemp = cmds.listRelatives (shoulderJNT, c = True)
-            shoulderTwistBindJnts = []
-            
-            #If there are more than 1 children for the shoulder joint [the one being the elbow jnt]
-            if len(shoulderTwistBindJntsTemp) > 1:
-                for jnt in shoulderTwistBindJntsTemp:
-                    if 'twist' in jnt:
-                        shoulderTwistBindJnts.append(jnt)
-                    
-                shoulderTwistBindJnts.sort()
-            
-            #Elbow
-            elbowTwistBindJntsTemp = cmds.listRelatives (elbowJNT, c = True)
-            elbowTwistBindJnts = []
-            
-            #If there are more than 1 children for the elbow joint [the one being the wrist jnt]
-            if len(elbowTwistBindJntsTemp) > 1:
-                for jnt in elbowTwistBindJntsTemp:
-                    if 'twist' in jnt:
-                        elbowTwistBindJnts.append(jnt)
-                    
-                elbowTwistBindJnts.sort()      
-            
                         
             bindJnts = [shoulderJNT, elbowJNT, wristJNT] + shoulderTwistBindJnts + elbowTwistBindJnts
             fkJnts = [shoulderFKJNT, elbowFKJNT, wristFKJNT] + shoulderTwistFKJNT + elbowTwistFKJNT
             ikJnts = [shoulderIKJNT, elbowIKJNT, wristIKJNT] + shoulderTwistIKJNT + elbowTwistIKJNT
             
-            #Connecting the FK-IK joints with the bind joints using blendColors node
+            #Connecting the FK-IK joints with the bind joints using constraints and reverse node
             for bind, fk, ik in zip (bindJnts, fkJnts, ikJnts):
-                for i in ['translate', 'rotate', 'scale']:
-                    blendColor = cmds.createNode('blendColors', n = bind.replace('JNT', 'blendColors_{}'.format(i))) #Creating a blendnode to blend the bind joint between fk and ik joints
-                    cmds.connectAttr('{0}.{1}'.format(fk, i), blendColor + '.color2')
-                    cmds.connectAttr('{0}.{1}'.format(ik, i), blendColor + '.color1')
-                    
-                    #Only when dealing with the shoulder joint, since the local values for the shoulder bind joint and fk & ik joints are different, due to the bind shoulder joint being parented to the clavicle joint
-                    #That is why we need to convert the world translate values to local translate values for the shoulder bind joint
-                    if bind == bindJnts[0] and i == 'translate':
-                        pointMatMult = cmds.createNode('pointMatrixMult', n = bind.replace('JNT', 'pointMatMult_{}'.format(i))) #Using 'pointMatrixMult' to get the local translate, rotate and scale values for the shoulder bind joint
-                        cmds.connectAttr(clavicleJNT + '.worldInverseMatrix', pointMatMult + '.inMatrix')
-                        cmds.connectAttr(blendColor + '.output', pointMatMult + '.inPoint')
-                        cmds.connectAttr(pointMatMult + '.output', '{0}.{1}'.format(bind, i))
-                    else:
-                        cmds.connectAttr(blendColor + '.output', '{0}.{1}'.format(bind, i))
-                    
-                    cmds.connectAttr (ikFkControl + '.FKIK', blendColor + '.blender')            
-                           
+               constraintStore = cmds.parentConstraint (fk, ik, bind, mo = False, weight = 1)[0]
+               reverseNode = cmds.createNode('reverse', n = constraintStore + '_armFK_rev')
+               cmds.connectAttr(ikFkControl + '.FKIK', reverseNode +'.inputX')
+               
+               cmds.connectAttr(reverseNode + '.outputX', "{0}.{1}W0".format(constraintStore, fk))               
+               cmds.connectAttr (ikFkControl + '.FKIK', "{0}.{1}W1".format(constraintStore, ik))   
+                 
             #Locking the unwanted attributes for the switch controller
             cmds.setAttr(ikFkControl + ".tx", lock = True, keyable = False, channelBox = False)
             cmds.setAttr(ikFkControl + ".ty", lock = True, keyable = False, channelBox = False)
@@ -3551,6 +3548,14 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
             
        
         elif (armfkSetup and not armikSetup):
+                                    
+            bindJnts = [shoulderJNT, elbowJNT, wristJNT] + shoulderTwistBindJnts + elbowTwistBindJnts
+            fkJnts = [shoulderFKJNT, elbowFKJNT, wristFKJNT] + shoulderTwistFKJNT + elbowTwistFKJNT
+            
+            #Connecting the FK-IK joints with the bind joints using constraints and reverse node
+            for bind, fk in zip (bindJnts, fkJnts):
+               constraintStore = cmds.parentConstraint (fk, bind, mo = False, weight = 1)[0]
+               
             armCTRL_grp = cmds.group (em = True, n = side + "_arm_CTRL_GRP")
             cmds.parent (side + "_armFK_CTRL_GRP", side + "_arm_CTRL_GRP", r = False)
             
@@ -3563,6 +3568,14 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
                 controllerColorAssign(0, 0, 255, clavicleCTRL, shoulderFKCTRL, elbowFKCTRL, wristFKCTRL)
             
         elif (armikSetup and not armfkSetup):
+                                    
+            bindJnts = [shoulderJNT, elbowJNT, wristJNT] + shoulderTwistBindJnts + elbowTwistBindJnts
+            ikJnts = [shoulderIKJNT, elbowIKJNT, wristIKJNT] + shoulderTwistIKJNT + elbowTwistIKJNT
+            
+            #Connecting the FK-IK joints with the bind joints using constraints and reverse node
+            for bind, ik in zip (bindJnts, ikJnts):
+               constraintStore = cmds.parentConstraint (ik, bind, mo = False, weight = 1)[0]
+               
             armCTRL_grp = cmds.group (em = True, n = side + "_arm_CTRL_GRP")
             cmds.parent (side + "_armIK_CTRL_GRP", side + "_arm_CTRL_GRP", r = False)
             
@@ -3570,9 +3583,9 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
             cmds.parent (shoulderIKJNT, side + "_arm_JNT_GRP", r = False)
                 
             if (cmds.xform (shoulderJNT, q = True, ws = True, translation = True)[0] > 0): #Checking the side of the controllers usinmg the X position of the shoulder joint 
-                controllerColorAssign(255, 0, 0, armIKCTRL, elbowIKCTRL)
+                controllerColorAssign(255, 0, 0, clavicleCTRL, armIKCTRL, elbowIKCTRL)
             else:                    
-                controllerColorAssign(0, 0, 255, armIKCTRL, elbowIKCTRL)
+                controllerColorAssign(0, 0, 255, clavicleCTRL, armIKCTRL, elbowIKCTRL)
             
         else:
             #Give out an error message
@@ -3587,7 +3600,32 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
         ankleRollInLoc = "L_ankleRollInPos_LOC"
         ankleRollOutLoc = "L_ankleRollOutPos_LOC"
         toeTipLoc = "L_toeTipPos_LOC"
-                       
+            
+        #Getting the twist bind joints and creating alist
+        #thigh
+        thighTwistBindJntsTemp = cmds.listRelatives (thighJNT, c = True)
+        thighTwistBindJnts = []
+        
+        #If there are more than 1 children for the thigh joint [the one being the knee jnt]
+        if len(thighTwistBindJntsTemp) > 1:
+            for jnt in thighTwistBindJntsTemp:
+                if 'twist' in jnt:
+                    thighTwistBindJnts.append(jnt)
+                
+            thighTwistBindJnts.sort()
+        
+        #knee
+        kneeTwistBindJntsTemp = cmds.listRelatives (kneeJNT, c = True)
+        kneeTwistBindJnts = []
+        
+        #If there are more than 1 children for the knee joint [the one being the ankle jnt]
+        if len(kneeTwistBindJntsTemp) > 1:
+            for jnt in kneeTwistBindJntsTemp:
+                if 'twist' in jnt:
+                    kneeTwistBindJnts.append(jnt)
+                
+            kneeTwistBindJnts.sort()    
+                                   
         thighTwistFKJNT = []
         kneeTwistFKJNT = []
         thighTwistIKJNT = []
@@ -4161,55 +4199,19 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
 
             cmds.select (ikFkControl, r = True)
             cmds.addAttr (ln = "FKIK", at = "float", min = 0, max = 1, dv = 0, k = True)
-            
-            #Getting the twist bind joints and creating alist
-            #thigh
-            thighTwistBindJntsTemp = cmds.listRelatives (thighJNT, c = True)
-            thighTwistBindJnts = []
-            
-            #If there are more than 1 children for the thigh joint [the one being the knee jnt]
-            if len(thighTwistBindJntsTemp) > 1:
-                for jnt in thighTwistBindJntsTemp:
-                    if 'twist' in jnt:
-                        thighTwistBindJnts.append(jnt)
-                    
-                thighTwistBindJnts.sort()
-            
-            #knee
-            kneeTwistBindJntsTemp = cmds.listRelatives (kneeJNT, c = True)
-            kneeTwistBindJnts = []
-            
-            #If there are more than 1 children for the knee joint [the one being the ankle jnt]
-            if len(kneeTwistBindJntsTemp) > 1:
-                for jnt in kneeTwistBindJntsTemp:
-                    if 'twist' in jnt:
-                        kneeTwistBindJnts.append(jnt)
-                    
-                kneeTwistBindJnts.sort()      
-            
                         
             bindJnts = [thighJNT, kneeJNT, ankleJNT, ballJNT] + thighTwistBindJnts + kneeTwistBindJnts
             fkJnts = [thighFKJNT, kneeFKJNT, ankleFKJNT, ballFKJNT] + thighTwistFKJNT + kneeTwistFKJNT
             ikJnts = [thighIKJNT, kneeIKJNT, ankleIKJNT, ballIKJNT] + thighTwistIKJNT + kneeTwistIKJNT
-            
-            #Connecting the FK-IK joints with the bind joints using blendColors node
+                
+            #Connecting the FK-IK joints with the bind joints using constraints and reverse node
             for bind, fk, ik in zip (bindJnts, fkJnts, ikJnts):
-                for i in ['translate', 'rotate', 'scale']:
-                    blendColor = cmds.createNode('blendColors', n = bind.replace('JNT', 'blendColors_{}'.format(i))) #Creating a blendnode to blend the bind joint between fk and ik joints
-                    cmds.connectAttr('{0}.{1}'.format(fk, i), blendColor + '.color2')
-                    cmds.connectAttr('{0}.{1}'.format(ik, i), blendColor + '.color1')
-                    
-                    #Only when dealing with the thigh joint, since the local values for the thigh bind joint and fk & ik joints are different, due to the bind thigh joint being parented to the clavicle joint
-                    #That is why we need to convert the world translate values to local translate values for the thigh bind joint
-                    if bind == bindJnts[0] and i == 'translate':
-                        pointMatMult = cmds.createNode('pointMatrixMult', n = bind.replace('JNT', 'pointMatMult_{}'.format(i))) #Using 'pointMatrixMult' to get the local translate, rotate and scale values for the thigh bind joint
-                        cmds.connectAttr(pelvisJNT + '.worldInverseMatrix', pointMatMult + '.inMatrix')
-                        cmds.connectAttr(blendColor + '.output', pointMatMult + '.inPoint')
-                        cmds.connectAttr(pointMatMult + '.output', '{0}.{1}'.format(bind, i))
-                    else:
-                        cmds.connectAttr(blendColor + '.output', '{0}.{1}'.format(bind, i))
-                    
-                    cmds.connectAttr (ikFkControl + '.FKIK', blendColor + '.blender')            
+               constraintStore = cmds.parentConstraint (fk, ik, bind, mo = False, weight = 1)[0]
+               reverseNode = cmds.createNode('reverse', n = constraintStore + '_legFK_rev')
+               cmds.connectAttr(ikFkControl + '.FKIK', reverseNode +'.inputX')
+               
+               cmds.connectAttr(reverseNode + '.outputX', "{0}.{1}W0".format(constraintStore, fk))               
+               cmds.connectAttr (ikFkControl + '.FKIK', "{0}.{1}W1".format(constraintStore, ik))              
                 
             #Locking the unwanted attributes for the switch controller
             cmds.setAttr(ikFkControl + ".tx", lock = True, keyable = False, channelBox = False)
@@ -4247,6 +4249,14 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
                 controllerColorAssign(0, 0, 255, thighFKCTRL, kneeFKCTRL, ankleFKCTRL, ballFKCTRL, legIKCTRL, kneeIKCTRL, ikFkControl)
             
         elif (legfkSetup and not legikSetup):
+                        
+            bindJnts = [thighJNT, kneeJNT, ankleJNT, ballJNT] + thighTwistBindJnts + kneeTwistBindJnts
+            fkJnts = [thighFKJNT, kneeFKJNT, ankleFKJNT, ballFKJNT] + thighTwistFKJNT + kneeTwistFKJNT
+                
+            #Connecting the FK-IK joints with the bind joints using constraints and reverse node
+            for bind, fk in zip (bindJnts, fkJnts):
+               constraintStore = cmds.parentConstraint (fk, bind, mo = False, weight = 1)[0]          
+               
             legCTRL_grp = cmds.group (em = True, n = side + "_leg_CTRL_GRP")
             cmds.parent (side + "_legFK_CTRL_GRP", side + "_leg_CTRL_GRP", r = False)
             
@@ -4259,6 +4269,14 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
                 controllerColorAssign(0, 0, 255, thighFKCTRL, kneeFKCTRL, ankleFKCTRL, ballFKCTRL)
             
         elif (legikSetup and not legfkSetup):
+                        
+            bindJnts = [thighJNT, kneeJNT, ankleJNT, ballJNT] + thighTwistBindJnts + kneeTwistBindJnts
+            ikJnts = [thighIKJNT, kneeIKJNT, ankleIKJNT, ballIKJNT] + thighTwistIKJNT + kneeTwistIKJNT
+                
+            #Connecting the FK-IK joints with the bind joints using constraints and reverse node
+            for bind, ik in zip (bindJnts, ikJnts):
+               constraintStore = cmds.parentConstraint (ik, bind, mo = False, weight = 1)[0]        
+               
             legCTRL_grp = cmds.group (em = True, n = side + "_leg_CTRL_GRP")
             cmds.parent (side + "_legIK_CTRL_GRP", side + "_leg_CTRL_GRP", r = False)
             
