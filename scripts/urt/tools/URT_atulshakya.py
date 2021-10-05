@@ -5,7 +5,8 @@
 #CREATION DATE: MAY 26, 2021
 
 #RUNNING VERSION: v032
-#LAST UPDATED: DEBUGGED THE CONTROL RIG SECTION AND ADDED IN ERROR MESSAGES
+#LAST UPDATED: DEBUGGED THE CONTROL RIG SECTION AND ADDED IN ERROR MESSAGES. 
+#              ADDED THE HELP BUTTON
 
 #DESCRIPTION: GROUP OF RIGGING TOOLS IN MAYA
 #REQUIREMENT: N/A
@@ -695,8 +696,9 @@ class MainDialog (QtWidgets.QDialog):
         
         
         '''       
-        Creating Cancel Buttons
+        Creating Cancel/Accept/Help Buttons
         '''
+        self.helpDocs_btn = QtWidgets.QPushButton ("Help")
         self.exportApply_btn = QtWidgets.QPushButton("Export")
         self.exportApply_btn.hide()
         self.accept_btn = QtWidgets.QPushButton("Accept")
@@ -715,6 +717,7 @@ class MainDialog (QtWidgets.QDialog):
         Cancel Button Layout
         '''
         button_layout = QtWidgets.QHBoxLayout() #Creating a horizontal layout for the buttons, which is going to be parented to the 'main_layout' below
+        button_layout.addWidget(self.helpDocs_btn)
         button_layout.addStretch() #Creates the space in front of the 'ok' button
         button_layout.addWidget(self.accept_btn)
         button_layout.addWidget(self.exportApply_btn)
@@ -1280,6 +1283,8 @@ class MainDialog (QtWidgets.QDialog):
     def create_connection (self):
         #Closes the window when the cancel button is pressed/clicked
         self.cancel_btn.clicked.connect(self.close)
+        
+        self.helpDocs_btn.clicked.connect(showHelp)
         
         self.custom_list.currentItemChanged.connect(self.custom_list_change)
         
@@ -4494,6 +4499,10 @@ RANGE OF MOTION SETUP
 END
 ####################################################################################################
 '''
+
+#Function to open the help documentation
+def showHelp():
+    cmds.showHelp("http://urtdocs.shakyatul.com/", absolute=True)
 
 #For development mode... only checks if the window exists when pressed numpad 'enter'
 # Showing the MainDialog window
