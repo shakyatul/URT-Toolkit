@@ -2,8 +2,8 @@ from maya import cmds
 
 
 def main():
-    from URT_atulshakya import MainDialog
-    MainDialog.showDialog()
+    from urt import install
+    install.execute()
 
 
 cmds.evalDeferred(main)
