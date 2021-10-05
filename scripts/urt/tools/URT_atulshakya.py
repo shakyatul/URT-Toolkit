@@ -7,6 +7,7 @@
 #RUNNING VERSION: v032
 #LAST UPDATED: DEBUGGED THE CONTROL RIG SECTION AND ADDED IN ERROR MESSAGES. 
 #              ADDED THE HELP BUTTON
+#              FIXED THE TWIST JOINTS FOR THE CONTROL RIG
 
 #DESCRIPTION: GROUP OF RIGGING TOOLS IN MAYA
 #REQUIREMENT: N/A
@@ -3220,7 +3221,7 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
             
             #Checking if there are twist joints parented to the shoulder
             shoulderChildJoint = cmds.listRelatives (shoulderJNT, c = True)
-                        
+            
             #If there are more than 1 children for the shoulder joint [the one being the elbow joint]
             if len(shoulderChildJoint) > 1:
                 for jnt in shoulderChildJoint:
@@ -3249,6 +3250,9 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
                     cmds.connectAttr(shoulderFKCTRL + '.rotateX', multDblNode + '.input1')
                     
                     cmds.connectAttr (multDblNode + '.output', jnt + '.rotateX')  
+                
+                cmds.select (shoulderTwistFKJNT, shoulderFKJNT, r = True)
+                cmds.parent()
             
             
             #Checking if there are twist joints parented to the elbow
@@ -3279,10 +3283,8 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
                     
                     cmds.connectAttr (multDblNode + '.output', jnt + '.rotateX') 
             
-            cmds.select (shoulderTwistFKJNT, shoulderFKJNT, r = True)
-            cmds.parent()
-            cmds.select (elbowTwistFKJNT, elbowFKJNT, r = True)
-            cmds.parent()
+                cmds.select (elbowTwistFKJNT, elbowFKJNT, r = True)
+                cmds.parent()
             
                         
         if armikSetup:
@@ -3419,7 +3421,10 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
                         cmds.parent (twistDuplicate, w = True)
                         shoulderTwistIKJNT.append(twistDuplicate)
                 
-                shoulderTwistIKJNT.sort()
+                shoulderTwistIKJNT.sort()  
+            
+                cmds.select (shoulderTwistIKJNT, shoulderIKJNT, r = True)
+                cmds.parent()
             
             #Checking if there are twist joints parented to the elbow
             elbowChildJoint = cmds.listRelatives (elbowJNT, c = True)
@@ -3447,12 +3452,10 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
                     
                     cmds.connectAttr(armIKCTRL + '.rotateX', multDblNode + '.input1')
                     
-                    cmds.connectAttr (multDblNode + '.output', jnt + '.rotateX')  
-            
-            cmds.select (shoulderTwistIKJNT, shoulderIKJNT, r = True)
-            cmds.parent()
-            cmds.select (elbowTwistIKJNT, elbowIKJNT, r = True)
-            cmds.parent()
+                    cmds.connectAttr (multDblNode + '.output', jnt + '.rotateX')
+                    
+                cmds.select (elbowTwistIKJNT, elbowIKJNT, r = True)
+                cmds.parent()
             
             
         if (armfkSetup and armikSetup):            
@@ -3599,7 +3602,7 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
             #Give out an error message
             om.MGlobal.displayError("SELECT EITHER FK,IK OR BOTH FOR THE ARM SETUP")
             return
-        
+                
 #Leg Setup
 def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikSetup, footRollSetup, pelvisJNT, controllerScale):         
     with UndoContext():          
@@ -3757,6 +3760,9 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
                     cmds.connectAttr(thighFKCTRL + '.rotateX', multDblNode + '.input1')
                     
                     cmds.connectAttr (multDblNode + '.output', jnt + '.rotateX')  
+                    
+                cmds.select (thighTwistFKJNT, thighFKJNT, r = True)
+                cmds.parent()
             
             
             #Checking if there are twist joints parented to the knee
@@ -3786,11 +3792,9 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
                     cmds.connectAttr(ankleFKCTRL + '.rotateX', multDblNode + '.input1')
                     
                     cmds.connectAttr (multDblNode + '.output', jnt + '.rotateX') 
-            
-            cmds.select (thighTwistFKJNT, thighFKJNT, r = True)
-            cmds.parent()
-            cmds.select (kneeTwistFKJNT, kneeFKJNT, r = True)
-            cmds.parent()
+                        
+                cmds.select (kneeTwistFKJNT, kneeFKJNT, r = True)
+                cmds.parent()
         
         if legikSetup:
             #IK Setup
@@ -4121,6 +4125,9 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
                 
                 thighTwistIKJNT.sort()
             
+                cmds.select (thighTwistIKJNT, thighIKJNT, r = True)
+                cmds.parent()
+            
             #Checking if there are twist joints parented to the knee
             kneeChildJoint = cmds.listRelatives (kneeJNT, c = True)
             
@@ -4149,10 +4156,9 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
                     
                     cmds.connectAttr (multDblNode + '.output', jnt + '.rotateX')  
             
-            cmds.select (thighTwistIKJNT, thighIKJNT, r = True)
-            cmds.parent()
-            cmds.select (kneeTwistIKJNT, kneeIKJNT, r = True)
-            cmds.parent()
+            
+                cmds.select (kneeTwistIKJNT, kneeIKJNT, r = True)
+                cmds.parent()
             
         if (legfkSetup and legikSetup):
             
