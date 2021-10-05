@@ -4,10 +4,8 @@
 #AUTHOR: ATUL SHAKYA
 #CREATION DATE: MAY 26, 2021
 
-#RUNNING VERSION: v032
-#LAST UPDATED: DEBUGGED THE CONTROL RIG SECTION AND ADDED IN ERROR MESSAGES. 
-#              ADDED THE HELP BUTTON
-#              FIXED THE TWIST JOINTS FOR THE CONTROL RIG
+#RUNNING VERSION: v033
+#LAST UPDATED: UPDATED THE WAY THE IK HANDLE IS SETUP (USING VECTOR MATH)
 
 #DESCRIPTION: GROUP OF RIGGING TOOLS IN MAYA
 #REQUIREMENT: N/A
@@ -2545,54 +2543,49 @@ def createIKChain(controllerScale):
             secondCTRL = mel.eval ("curve -d 1 -p 0 1 0 -p -0.258819 0.965926 0 -p -0.5 0.866025 0 -p -0.707107 0.707107 0 -p -0.866025 0.5 0 -p -0.965926 0.258819 0 -p -1 0 0 -p -0.965926 -0.258819 0 -p -0.866025 -0.5 0 -p -0.707107 -0.707107 0 -p -0.5 -0.866025 0 -p -0.258819 -0.965926 0 -p 0 -1 0 -p 0.258819 -0.965926 0 -p 0.5 -0.866025 0 -p 0.707107 -0.707107 0 -p 0.866025 -0.5 0 -p 0.965926 -0.258819 0 -p 1 0 0 -p 0.965926 0.258819 0 -p 0.866025 0.5 0 -p 0.707107 0.707107 0 -p 0.5 0.866025 0 -p 0.258819 0.965926 0 -p 0 1 0 -p 0 0.965926 -0.258819 -p 0 0.866025 -0.5 -p 0 0.707107 -0.707107 -p 0 0.5 -0.866025 -p 0 0.258819 -0.965926 -p 0 0 -1 -p 0 -0.258819 -0.965926 -p 0 -0.5 -0.866025 -p 0 -0.707107 -0.707107 -p 0 -0.866025 -0.5 -p 0 -0.965926 -0.258819 -p 0 -1 0 -p 0 -0.965926 0.258819 -p 0 -0.866025 0.5 -p 0 -0.707107 0.707107 -p 0 -0.5 0.866025 -p 0 -0.258819 0.965926 -p 0 0 1 -p 0 0.258819 0.965926 -p 0 0.5 0.866025 -p 0 0.707107 0.707107 -p 0 0.866025 0.5 -p 0 0.965926 0.258819 -p 0 1 0 -p 0.258819 0.965926 0 -p 0.5 0.866025 0 -p 0.707107 0.707107 0 -p 0.866025 0.5 0 -p 0.965926 0.258819 0 -p 1 0 0 -p 0.866025 0 -0.5 -p 0.5 0 -0.866025 -p 0 0 -1 -p -0.5 0 -0.866025 -p -0.866025 0 -0.5 -p -1 0 0 -p -0.866025 0 0.5 -p -0.5 0 0.866025 -p 0 0 1 -p 0.5 0 0.866025 -p 0.866025 0 0.5 -p 1 0 0 -k 0 -k 1 -k 2 -k 3 -k 4 -k 5 -k 6 -k 7 -k 8 -k 9 -k 10 -k 11 -k 12 -k 13 -k 14 -k 15 -k 16 -k 17 -k 18 -k 19 -k 20 -k 21 -k 22 -k 23 -k 24 -k 25 -k 26 -k 27 -k 28 -k 29 -k 30 -k 31 -k 32 -k 33 -k 34 -k 35 -k 36 -k 37 -k 38 -k 39 -k 40 -k 41 -k 42 -k 43 -k 44 -k 45 -k 46 -k 47 -k 48 -k 49 -k 50 -k 51 -k 52 -k 53 -k 54 -k 55 -k 56 -k 57 -k 58 -k 59 -k 60 -k 61 -k 62 -k 63 -k 64 -k 65 -k 66;")
             secondCTRL = cmds.rename (secondCTRL, secondJNT + "_IK_CTRL")
             cmds.select(secondCTRL, r = True)
-            cmds.scale(controllerScale, controllerScale, controllerScale, r = True)
-            cmds.rotate (0, -90, 0)
+            cmds.scale(controllerScale/2, controllerScale/2, controllerScale/2, r = True)
             cmds.makeIdentity (apply = True, r = 1, t = 1, s = 1, n = 0)
             cmds.DeleteHistory()
             
             secondGRP_con = cmds.group (n = secondCTRL + "_CON")
+            cmds.xform (secondGRP_con, ws = True, pivots = (0,0,0))
             secondGRP_off = cmds.group (n = secondCTRL + "_0")
+            cmds.xform (secondGRP_off, ws = True, pivots = (0,0,0))
+            
+            #Creating Arrow connecting pole vector controller and elbow joint
+            annoteLoc = cmds.spaceLocator (n = secondJNT + '_annotation_LOC')
+            cmds.delete (cmds.parentConstraint (secondJNT, annoteLoc, weight = 1))
+            
+            cmds.parent (annoteLoc, secondJNT)
+            
+            annotationShape = cmds.annotate(annoteLoc)
+            annote = cmds.group (annotationShape, n = secondJNT + '_annotation')
+            
+            cmds.setAttr (annotationShape + '.overrideEnabled', 1)
+            cmds.setAttr (annotationShape + '.overrideDisplayType', 1)
+            
+            cmds.parent (annote, secondCTRL)
+            cmds.ResetTransformations(annote)
+            cmds.setAttr ("{0}.visibility".format(annoteLoc[0]), 0)
             
             #Main Controller
             mainCTRL = cmds.curve (d = 1, n = thirdJNT + "_IK_CTRL", p = [(-1, 0, -1), (1, 0, -1), (1, 0, 1), (-1, 0, 1), (-1, 0, -1)], k = [0, 1, 2, 3, 4])
             cmds.select(mainCTRL, r = True)
             cmds.scale(controllerScale, controllerScale, controllerScale, r = True)   
+            cmds.rotate (0, 0, 90, r = True)
             cmds.makeIdentity (apply = True, r = 1, t = 1, s = 1, n = 0)
             cmds.DeleteHistory() 
             
             mainGRP_con = cmds.group (n = mainCTRL + "_CON")
             mainGRP_off = cmds.group (n = mainCTRL + "_0")
             
-            #Creating locators to calculate the position for the elbow controller
-            cmds.spaceLocator (p = (0,0,0), name = "locatorA")
-            cmds.group(name = "groupA")
-            cmds.spaceLocator (p = (0,0,0), name = "locatorB")
-            cmds.group(name = "groupB")
-            
-            cmds.select (firstJNT, thirdJNT, "groupA", r = True)
-            cmds.pointConstraint (offset = (0,0,0), weight = 1)
-            
-            cmds.select (secondJNT, "groupA", r = True)
-            cmds.aimConstraint(offset = (0,0,0), weight = 1, aimVector = (1,0,0), upVector = (0,1,0), worldUpType = "scene")
-            
-            cmds.select(secondJNT, "locatorA", r = True)
-            cmds.pointConstraint(offset = (0,0,0), skip = ("y","z"), weight = 1)
-            
-            cmds.select(secondJNT, "groupB", r = True)
-            cmds.pointConstraint(offset = (0,0,0), weight = 1)
-            
-            cmds.select("locatorA", "groupB", r = True)
-            cmds.aimConstraint(offset = (0,0,0), weight = 1, aimVector = (0,0,1), upVector = (0,1,0), worldUpType = "scene")
-            
-            cmds.select("locatorB")
-            cmds.move (0, 0, 0, r = True, os = True, wd = True)
-            
-            #Grabing the postition of the locator to position the pole vector controller
-            locatorPos = cmds.xform ("locatorB", q = True, worldSpace = True, translation = True)
-            cmds.select(secondGRP_off, r = True)
-            cmds.move (locatorPos[0], locatorPos[1], locatorPos[2], a = True)
-            
-            cmds.delete("groupA", "groupB")
+            #Setting up the Pole-Vector position
+            firstJNTPos = cmds.xform (firstJNT, q = True, ws = True, translation = True)
+            secondJNTPos = cmds.xform (secondJNT, q = True, ws = True, translation = True)
+            thirdJNTPos = cmds.xform (thirdJNT, q = True, ws = True, translation = True)
+
+            poleVectorPos = getPoleVectorPos (firstJNTPos, secondJNTPos, thirdJNTPos)
+            cmds.xform (secondGRP_off, ws = True, translation = poleVectorPos)
             
             #Position the Main Controller
             cmds.select (thirdJNT, mainGRP_off, r = True)
@@ -3350,29 +3343,12 @@ def bipedArmBuild(side, clavicleJNT, shoulderJNT, elbowJNT, wristJNT, armfkSetup
             cmds.rotate (0, 0, -90, r = True, os = True, fo = True)
             
             #Setting up the Pole-Vector position
-            tempPlane = cmds.polyPlane(subdivisionsHeight = 1, subdivisionsWidth = 1)[0]
-            cmds.delete(tempPlane + '.vtx[3]')
-
             shoulderPos = cmds.xform (shoulderIKJNT, q = True, ws = True, translation = True)
-            cmds.xform (tempPlane + '.vtx[0]', ws = True, translation = shoulderPos)
-
             elbowPos = cmds.xform (elbowIKJNT, q = True, ws = True, translation = True)
-            cmds.xform (tempPlane + '.vtx[1]', ws = True, translation = elbowPos)
-
             wristPos = cmds.xform (wristIKJNT, q = True, ws = True, translation = True)
-            cmds.xform (tempPlane + '.vtx[2]', ws = True, translation = wristPos)
-            
-            if (elbowPos[0] < 0):
-                uValue = -5 * controllerScale
-            else:
-                uValue = 5 * controllerScale
-            
-            cmds.moveVertexAlongDirection (tempPlane + '.vtx[1]', u = uValue) #Moving the elbow vertex of the plane along the V-normal axis
 
-            poleVectorPos = cmds.xform (tempPlane + '.vtx[1]', q = True, ws = True, translation = True)
+            poleVectorPos = getPoleVectorPos (shoulderPos, elbowPos, wristPos)
             cmds.xform (elbowIKOFF, ws = True, translation = poleVectorPos)
-
-            cmds.delete(tempPlane)
             
             #Setting up the controllers in their hierachy
             cmds.group (em = True, n = side + "_armIK_CTRL_GRP")
@@ -3887,24 +3863,12 @@ def bipedLegBuild(side, thighJNT, kneeJNT, ankleJNT, ballJNT, legfkSetup, legikS
             cmds.move (0, a = True, y = True)
             
             #Setting up the Pole-Vector position
-            tempPlane = cmds.polyPlane(subdivisionsHeight = 1, subdivisionsWidth = 1)[0]
-            cmds.delete(tempPlane + '.vtx[3]')
-
             thighPos = cmds.xform (thighIKJNT, q = True, ws = True, translation = True)
-            cmds.xform (tempPlane + '.vtx[0]', ws = True, translation = thighPos)
-
             kneePos = cmds.xform (kneeIKJNT, q = True, ws = True, translation = True)
-            cmds.xform (tempPlane + '.vtx[1]', ws = True, translation = kneePos)
-
             anklePos = cmds.xform (ankleIKJNT, q = True, ws = True, translation = True)
-            cmds.xform (tempPlane + '.vtx[2]', ws = True, translation = anklePos)
 
-            cmds.moveVertexAlongDirection (tempPlane + '.vtx[1]', v = 5 * controllerScale) #Moving the knee vertex of the plane along the V-normal axis
-
-            poleVectorPos = cmds.xform (tempPlane + '.vtx[1]', q = True, ws = True, translation = True)
+            poleVectorPos = getPoleVectorPos (thighPos, kneePos, anklePos)
             cmds.xform (kneeIKOFF, ws = True, translation = poleVectorPos)
-
-            cmds.delete(tempPlane)
             
             #Setting up the controllers in their hierachy
             cmds.group (em = True, n = side + "_legIK_CTRL_GRP")
@@ -4502,6 +4466,47 @@ def createROM (rotXP, rotYP, rotZP, rotXN, rotYN, rotZN, rotAngle, keyFramePaddi
 '''
 ####################################################################################################
 RANGE OF MOTION SETUP
+END
+####################################################################################################
+'''
+
+'''
+####################################################################################################
+POLE VECTOR POSITION
+START
+####################################################################################################
+'''
+#Function to get the postion of the pole vector using 3 Joints
+def getPoleVectorPos (firstJNT, secondJNT, thirdJNT):
+    firstJNTVec = om.MVector(firstJNT[0], firstJNT[1], firstJNT[2])
+    secondJNTVec = om.MVector(secondJNT[0], secondJNT[1], secondJNT[2])
+    thirdJNTVec = om.MVector(thirdJNT[0], thirdJNT[1], thirdJNT[2])
+        
+    line = (thirdJNTVec - firstJNTVec)
+    point = (secondJNTVec - firstJNTVec)
+    
+    scaleValue = (line * point) / (line * line) #calculating the dot product
+    
+    projectionVector = line * scaleValue + firstJNTVec
+    
+    #Calculating the length of the joint chain
+    rootToMidLength = (secondJNTVec - firstJNTVec).length()
+    midToEndLength = (thirdJNTVec - secondJNTVec).length()
+    
+    totalLength = rootToMidLength + midToEndLength
+       
+    #Checking if the projection vector and the second joint vector are at the same place
+    if (projectionVector.isEquivalent(secondJNTVec, 0.0005)):
+        projectionVector.z  = projectionVector.z + 0.0005
+    
+    #Grabbing the position of the pole vector
+    poleVectorPos = (secondJNTVec - projectionVector).normal() * totalLength + secondJNTVec
+    
+    return poleVectorPos
+    
+'''
+####################################################################################################
+POLE VECTOR POSITION
 END
 ####################################################################################################
 '''
